@@ -12,6 +12,19 @@ class NdpdLogBase(BaseModel):
     status: str = Field(default="pending", max_length=50, description="Status da análise", example="completed")
     user_id: str | None = Field(None, max_length=100, description="ID do usuário responsável", example="user_123")
     error_message: str | None = Field(None, description="Mensagem de erro caso falhe")
+    
+    # Campos NDPD
+    site_id: str | None = Field(None, max_length=100, description="ID do site", example="SITE-001")
+    relatorio: str | None = Field(None, max_length=255, description="Relatório", example="REL-2026-001")
+    oc: str | None = Field(None, max_length=100, description="Ordem de Compra", example="OC-12345")
+    os: str | None = Field(None, max_length=100, description="Ordem de Serviço", example="OS-67890")
+    nome_item: str | None = Field(None, max_length=255, description="Nome do item", example="Cabo de rede CAT6")
+    quantidade_aprovada: float | None = Field(None, ge=0, description="Quantidade aprovada", example=10.0)
+    quantidade_pendente: float | None = Field(None, ge=0, description="Quantidade pendente", example=5.0)
+    quantidade_reprovada: float | None = Field(None, ge=0, description="Quantidade reprovada", example=2.0)
+    quantidade_total: float | None = Field(None, ge=0, description="Quantidade total", example=17.0)
+    motivo_reprovacao: str | None = Field(None, description="Motivo da reprovação", example="Não conforme especificação")
+    data_hora: datetime | None = Field(None, description="Data e hora da análise")
 
 
 class NdpdLogCreate(NdpdLogBase):
@@ -19,11 +32,20 @@ class NdpdLogCreate(NdpdLogBase):
         json_schema_extra={
             "example": {
                 "title": "Análise NDPD #001",
-                "description": "Análise de padrões de tráfego",
-                "analysis_type": "traffic_analysis",
-                "input_data": {"period": "2026-10", "filters": ["source"]},
-                "status": "pending",
-                "user_id": "user_123"
+                "description": "Análise de item recebimento",
+                "analysis_type": "recebimento",
+                "status": "pendente",
+                "site_id": "SITE-001",
+                "relatorio": "REL-2026-001",
+                "oc": "OC-12345",
+                "os": "OS-67890",
+                "nome_item": "Cabo de rede CAT6",
+                "quantidade_aprovada": 10.0,
+                "quantidade_pendente": 5.0,
+                "quantidade_reprovada": 2.0,
+                "quantidade_total": 17.0,
+                "motivo_reprovacao": None,
+                "data_hora": "2026-10-28T17:00:00"
             }
         }
     )
@@ -38,12 +60,27 @@ class NdpdLogUpdate(BaseModel):
     status: str | None = Field(None, max_length=50)
     user_id: str | None = Field(None, max_length=100)
     error_message: str | None = None
+    
+    site_id: str | None = Field(None, max_length=100)
+    relatorio: str | None = Field(None, max_length=255)
+    oc: str | None = Field(None, max_length=100)
+    os: str | None = Field(None, max_length=100)
+    nome_item: str | None = Field(None, max_length=255)
+    quantidade_aprovada: float | None = Field(None, ge=0)
+    quantidade_pendente: float | None = Field(None, ge=0)
+    quantidade_reprovada: float | None = Field(None, ge=0)
+    quantidade_total: float | None = Field(None, ge=0)
+    motivo_reprovacao: str | None = None
+    data_hora: datetime | None = None
 
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
-                "status": "completed",
-                "result_data": {"findings": ["pattern_1"], "score": 0.95}
+                "status": "aprovado",
+                "quantidade_aprovada": 15.0,
+                "quantidade_pendente": 2.0,
+                "quantidade_reprovada": 0.0,
+                "motivo_reprovacao": None
             }
         }
     )
