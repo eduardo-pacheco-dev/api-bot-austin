@@ -1,0 +1,22 @@
+{
+  "name": "api-bot-austin",
+  "version": "0.1.0",
+  "description": "API Bot Austin - FastAPI com endpoint health",
+  "scripts": {
+    "setup": "python3 -m venv venv && ./venv/bin/pip install --upgrade pip && ./venv/bin/pip install -r requirements.txt",
+    "dev": "pm2 start ecosystem.config.js --env development",
+    "start": "pm2 start ecosystem.config.js --env production",
+    "stop": "pm2 stop api-bot-austin",
+    "restart": "pm2 restart api-bot-austin",
+    "reload": "pm2 reload api-bot-austin",
+    "delete": "pm2 delete api-bot-austin",
+    "logs": "pm2 logs api-bot-austin",
+    "status": "pm2 status"
+  },
+  "keywords": [
+    "fastapi",
+    "pm2"
+  ],
+  "author": "",
+  "license": "MIT"
+}
