@@ -19,16 +19,16 @@ class NdpdLog(Base):
     
     # Campos NDPD específicos
     site_id = Column(String(100), nullable=True, index=True)
-    relatorio = Column(String(255), nullable=True)
-    oc = Column(String(100), nullable=True, index=True)
-    os = Column(String(100), nullable=True, index=True)
-    nome_item = Column(String(255), nullable=True)
-    quantidade_aprovada = Column(Float, nullable=True, default=0)
-    quantidade_pendente = Column(Float, nullable=True, default=0)
-    quantidade_reprovada = Column(Float, nullable=True, default=0)
-    quantidade_total = Column(Float, nullable=True, default=0)
-    motivo_reprovacao = Column(Text, nullable=True)
-    data_hora = Column(DateTime(timezone=True), nullable=True)
+    report = Column(String(255), nullable=True)
+    po = Column(String(100), nullable=True, index=True)  # Purchase Order
+    so = Column(String(100), nullable=True, index=True)  # Service Order
+    item_name = Column(String(255), nullable=True)
+    quantity_approved = Column(Float, nullable=True, default=0)
+    quantity_pending = Column(Float, nullable=True, default=0)
+    quantity_rejected = Column(Float, nullable=True, default=0)
+    quantity_total = Column(Float, nullable=True, default=0)
+    rejection_reason = Column(Text, nullable=True)
+    event_datetime = Column(DateTime(timezone=True), nullable=True)
     
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)

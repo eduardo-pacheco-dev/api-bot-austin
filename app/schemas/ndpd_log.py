@@ -13,39 +13,39 @@ class NdpdLogBase(BaseModel):
     user_id: str | None = Field(None, max_length=100, description="ID do usuário responsável", example="user_123")
     error_message: str | None = Field(None, description="Mensagem de erro caso falhe")
     
-    # Campos NDPD
-    site_id: str | None = Field(None, max_length=100, description="ID do site", example="SITE-001")
-    relatorio: str | None = Field(None, max_length=255, description="Relatório", example="REL-2026-001")
-    oc: str | None = Field(None, max_length=100, description="Ordem de Compra", example="OC-12345")
-    os: str | None = Field(None, max_length=100, description="Ordem de Serviço", example="OS-67890")
-    nome_item: str | None = Field(None, max_length=255, description="Nome do item", example="Cabo de rede CAT6")
-    quantidade_aprovada: float | None = Field(None, ge=0, description="Quantidade aprovada", example=10.0)
-    quantidade_pendente: float | None = Field(None, ge=0, description="Quantidade pendente", example=5.0)
-    quantidade_reprovada: float | None = Field(None, ge=0, description="Quantidade reprovada", example=2.0)
-    quantidade_total: float | None = Field(None, ge=0, description="Quantidade total", example=17.0)
-    motivo_reprovacao: str | None = Field(None, description="Motivo da reprovação", example="Não conforme especificação")
-    data_hora: datetime | None = Field(None, description="Data e hora da análise")
+    # NDPD fields
+    site_id: str | None = Field(None, max_length=100, description="Site ID", example="SITE-001")
+    report: str | None = Field(None, max_length=255, description="Report", example="REL-2026-001")
+    po: str | None = Field(None, max_length=100, description="Purchase Order", example="OC-12345")
+    so: str | None = Field(None, max_length=100, description="Service Order", example="OS-67890")
+    item_name: str | None = Field(None, max_length=255, description="Item name", example="Cabo de rede CAT6")
+    quantity_approved: float | None = Field(None, ge=0, description="Approved quantity", example=10.0)
+    quantity_pending: float | None = Field(None, ge=0, description="Pending quantity", example=5.0)
+    quantity_rejected: float | None = Field(None, ge=0, description="Rejected quantity", example=2.0)
+    quantity_total: float | None = Field(None, ge=0, description="Total quantity", example=17.0)
+    rejection_reason: str | None = Field(None, description="Rejection reason", example="Not in accordance with specifications")
+    event_datetime: datetime | None = Field(None, description="Event datetime")
 
 
 class NdpdLogCreate(NdpdLogBase):
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
-                "title": "Análise NDPD #001",
-                "description": "Análise de item recebimento",
-                "analysis_type": "recebimento",
-                "status": "pendente",
+                "title": "NDPD Analysis #001",
+                "description": "Item receipt analysis",
+                "analysis_type": "receipt",
+                "status": "pending",
                 "site_id": "SITE-001",
-                "relatorio": "REL-2026-001",
-                "oc": "OC-12345",
-                "os": "OS-67890",
-                "nome_item": "Cabo de rede CAT6",
-                "quantidade_aprovada": 10.0,
-                "quantidade_pendente": 5.0,
-                "quantidade_reprovada": 2.0,
-                "quantidade_total": 17.0,
-                "motivo_reprovacao": None,
-                "data_hora": "2026-10-28T17:00:00"
+                "report": "REL-2026-001",
+                "po": "OC-12345",
+                "so": "OS-67890",
+                "item_name": "Cabo de rede CAT6",
+                "quantity_approved": 10.0,
+                "quantity_pending": 5.0,
+                "quantity_rejected": 2.0,
+                "quantity_total": 17.0,
+                "rejection_reason": None,
+                "event_datetime": "2026-10-28T17:00:00"
             }
         }
     )
@@ -62,25 +62,25 @@ class NdpdLogUpdate(BaseModel):
     error_message: str | None = None
     
     site_id: str | None = Field(None, max_length=100)
-    relatorio: str | None = Field(None, max_length=255)
-    oc: str | None = Field(None, max_length=100)
-    os: str | None = Field(None, max_length=100)
-    nome_item: str | None = Field(None, max_length=255)
-    quantidade_aprovada: float | None = Field(None, ge=0)
-    quantidade_pendente: float | None = Field(None, ge=0)
-    quantidade_reprovada: float | None = Field(None, ge=0)
-    quantidade_total: float | None = Field(None, ge=0)
-    motivo_reprovacao: str | None = None
-    data_hora: datetime | None = None
+    report: str | None = Field(None, max_length=255)
+    po: str | None = Field(None, max_length=100)
+    so: str | None = Field(None, max_length=100)
+    item_name: str | None = Field(None, max_length=255)
+    quantity_approved: float | None = Field(None, ge=0)
+    quantity_pending: float | None = Field(None, ge=0)
+    quantity_rejected: float | None = Field(None, ge=0)
+    quantity_total: float | None = Field(None, ge=0)
+    rejection_reason: str | None = None
+    event_datetime: datetime | None = None
 
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
-                "status": "aprovado",
-                "quantidade_aprovada": 15.0,
-                "quantidade_pendente": 2.0,
-                "quantidade_reprovada": 0.0,
-                "motivo_reprovacao": None
+                "status": "approved",
+                "quantity_approved": 15.0,
+                "quantity_pending": 2.0,
+                "quantity_rejected": 0.0,
+                "rejection_reason": None
             }
         }
     )
