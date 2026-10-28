@@ -22,10 +22,11 @@ npm install    # Instala dependências npm (apenas scripts)
 cp .env.example .env
 ```
 
-Edite o `.env` e adicione seu token do Telegram:
+Edite o `.env` e adicione seu token do Telegram e o chat que receberá as notificações:
 
 ```env
 TELEGRAM_BOT_TOKEN=123456:ABC-DEF...
+TELEGRAM_CHAT_ID=123456789
 ```
 
 ## Executando com PM2 (modo desenvolvimento)
@@ -71,4 +72,8 @@ uvicorn main:app --reload
 - `/start` - Mensagem de boas-vindas
 - `/hello` - Dizer olá
 - `/help` - Lista de comandos
+
+**Notificações NDPD:**
+Ao criar um log via `POST /api/v1/ndpd-logs/`, a API envia automaticamente um resumo
+formatado da vistoria para o chat configurado em `TELEGRAM_CHAT_ID`.
 

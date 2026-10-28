@@ -8,6 +8,8 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### Added
+- Notificação automática no Telegram ao criar um log via `POST /api/v1/ndpd-logs/`, com resumo formatado da vistoria (site, relatório, OC, OS, item, status, quantidades e motivo de reprovação)
+- Variável de ambiente `TELEGRAM_CHAT_ID` para definir o chat de destino das notificações
 - Endpoint `GET /bot/status` para monitoramento do bot do Telegram via PM2 com documentação completa no Swagger
 - Bot do Telegram com `python-telegram-bot` (comandos `/start`, `/hello`, `/help`)
 - Configuração PM2 para rodar bot separadamente (`ecosystem.bot.config.js`)

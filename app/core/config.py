@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     version: str = "0.1.0"
     database_url: str = "sqlite:///./ndpd_dev.db"
     telegram_bot_token: str | None = None
+    telegram_chat_id: str | None = None
     environment: str = "development"
 
     class Config:

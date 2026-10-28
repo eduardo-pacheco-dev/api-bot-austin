@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 from typing import Optional
 
 from app.db.session import get_db
 from app.services.ndpd_log_service import NdpdLogService
+from app.services.telegram_service import build_ndpd_log_message, send_telegram_message
 from app.schemas.ndpd_log import NdpdLogCreate, NdpdLogUpdate, NdpdLogResponse, NdpdLogListResponse
 
 router = APIRouter()
@@ -16,9 +17,15 @@ router = APIRouter()
     summary="Criar log de análise NDPD",
     description="Cria um novo registro de log de análise NDPD",
 )
-def create_ndpd_log(ndpd_log: NdpdLogCreate, db: Session = Depends(get_db)):
+def create_ndpd_log(
+    ndpd_log: NdpdLogCreate,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+):
     service = NdpdLogService(db)
-    return service.create(ndpd_log)
+    log = service.create(ndpd_log)
+    background_tasks.add_task(send_telegram_message, build_ndpd_log_message(log))
+    return log
 
 
 @router.get(
