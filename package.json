@@ -1,16 +1,20 @@
 {
   "name": "api-bot-austin",
   "version": "0.1.0",
-  "description": "API Bot Austin - FastAPI com endpoint health",
+  "description": "API Bot Austin - FastAPI com endpoint health + Telegram Bot",
   "scripts": {
     "setup": "python3 -m venv venv && ./venv/bin/pip install --upgrade pip && ./venv/bin/pip install -r requirements.txt",
     "dev": "pm2 start ecosystem.config.js --env development",
+    "dev:bot": "pm2 start ecosystem.bot.config.js --env development",
+    "dev:all": "pm2 start ecosystem.config.js ecosystem.bot.config.js --env development",
     "start": "pm2 start ecosystem.config.js --env production",
-    "stop": "pm2 stop api-bot-austin",
-    "restart": "pm2 restart api-bot-austin",
-    "reload": "pm2 reload api-bot-austin",
-    "delete": "pm2 delete api-bot-austin",
-    "logs": "pm2 logs api-bot-austin",
+    "bot:start": "pm2 start ecosystem.bot.config.js",
+    "stop": "pm2 stop api-bot-austin api-bot-austin-telegram",
+    "restart": "pm2 restart api-bot-austin api-bot-austin-telegram",
+    "delete": "pm2 delete api-bot-austin api-bot-austin-telegram",
+    "logs": "pm2 logs",
+    "logs:api": "pm2 logs api-bot-austin",
+    "logs:bot": "pm2 logs api-bot-austin-telegram",
     "status": "pm2 status"
   },
   "keywords": [

@@ -1,6 +1,6 @@
 ---
 name: python-project-structure
-description: Python project organization, module architecture, and public API design. Use when setting up new projects, organizing modules, defining public interfaces with __all__, or planning directory layouts.
+description: Python project organization, module architecture, and public API design. Use when setting up new projects, organizing modules, defining public interfaces with __all__, or planning directory layouts. Always maintain a CHANGELOG.md following Keep a Changelog format and update it on every commit with relevant changes (Added, Changed, Deprecated, Removed, Fixed, Security).
 ---
 
 # Python Project Structure & Module Architecture
