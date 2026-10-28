@@ -10,3 +10,9 @@ __pycache__/
 # Bot
 .env
 bot_session.session
+
+# DB
+alembic/versions/*.pyc
+
+# SQLite
+*.db

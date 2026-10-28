@@ -5,14 +5,23 @@ import subprocess
 import json
 from typing import Literal
 
+from app.api.v1 import router as api_v1_router
+from app.db.session import engine
+from app.db.base import Base
+
+# Criar tabelas
+Base.metadata.create_all(bind=engine)
+
 app = FastAPI(
     title="api-bot-austin",
-    description="API com endpoint health e monitoramento do bot do Telegram",
+    description="API com endpoint health, monitoramento do bot do Telegram e CRUD de logs de análise NDPD",
     version="0.1.0",
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",
 )
+
+app.include_router(api_v1_router, prefix="/api/v1")
 
 
 class HealthResponse(BaseModel):
