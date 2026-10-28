@@ -20,7 +20,7 @@ class NdpdLog(Base):
     # Campos NDPD específicos
     site_id = Column(String(100), nullable=True, index=True)
     report = Column(String(255), nullable=True)
-    po = Column(String(100), nullable=True, index=True)  # Purchase Order
+    oc = Column(String(100), nullable=True, index=True)  # Ordem Complexa
     so = Column(String(100), nullable=True, index=True)  # Service Order
     item_name = Column(String(255), nullable=True)
     quantity_approved = Column(Float, nullable=True, default=0)

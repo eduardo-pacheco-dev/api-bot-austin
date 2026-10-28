@@ -21,6 +21,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - API agora integrada com monitoramento do bot
 - Atualização do `README.md` com instruções para API + Bot
 - Configuração do PM2 ajustada para usar `venv`
+- Campo `po` renomeado para `oc` (Ordem Complexa) no endpoint `/api/v1/ndpd-logs/`
 
 ### Fixed
 - Correção na configuração do PM2 para executar via `venv/bin/uvicorn`

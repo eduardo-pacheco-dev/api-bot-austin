@@ -16,7 +16,7 @@ class NdpdLogBase(BaseModel):
     # NDPD fields
     site_id: str | None = Field(None, max_length=100, description="Site ID", example="SITE-001")
     report: str | None = Field(None, max_length=255, description="Report", example="REL-2026-001")
-    po: str | None = Field(None, max_length=100, description="Purchase Order", example="OC-12345")
+    oc: str | None = Field(None, max_length=100, description="Ordem Complexa", example="OC-12345")
     so: str | None = Field(None, max_length=100, description="Service Order", example="OS-67890")
     item_name: str | None = Field(None, max_length=255, description="Item name", example="Cabo de rede CAT6")
     quantity_approved: float | None = Field(None, ge=0, description="Approved quantity", example=10.0)
@@ -37,7 +37,7 @@ class NdpdLogCreate(NdpdLogBase):
                 "status": "pending",
                 "site_id": "SITE-001",
                 "report": "REL-2026-001",
-                "po": "OC-12345",
+                "oc": "OC-12345",
                 "so": "OS-67890",
                 "item_name": "Cabo de rede CAT6",
                 "quantity_approved": 10.0,
@@ -63,7 +63,7 @@ class NdpdLogUpdate(BaseModel):
     
     site_id: str | None = Field(None, max_length=100)
     report: str | None = Field(None, max_length=255)
-    po: str | None = Field(None, max_length=100)
+    oc: str | None = Field(None, max_length=100)
     so: str | None = Field(None, max_length=100)
     item_name: str | None = Field(None, max_length=255)
     quantity_approved: float | None = Field(None, ge=0)
